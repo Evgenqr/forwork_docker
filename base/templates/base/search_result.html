@@ -1,0 +1,29 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}
+Результаты поиска
+{% endblock %}
+
+{% block content %}
+    <h2>Результаты поиска</h2>
+    <div class="grey-card">
+        {% for object in object_list %}
+            <div class="row" style="padding-bottom: 1rem;">
+                <div class="col-sm-10">
+                    <b style="font-size: 12pt;">
+                        <a href="{{object.get_absolute_url}}" >
+                            {{ object.title }}
+                        </a>
+                    </b>
+                </div>
+                <div class="col-sm-2 text-right">
+                    {{object.date_create.date}}
+                </div>
+                
+            </div>
+        {% endfor %}
+    </div>
+    <span class="pagination justify-content-center">
+        Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+    </span>
+{% endblock content %}

@@ -1,0 +1,99 @@
+{% load static %}
+
+<div class="container">
+  <div class="row" >
+    <div class="col-sm-6">
+      <a class="navbar-brand" href="/admin">
+        <img src="{% static 'img/logo.png' %}" alt="" width="250" height="110">
+      </a>
+    </div>
+    <div class="col-sm-6">
+      <ul class="nav position-relative">  
+        {% if request.user.is_authenticated %}
+          <li class="nav-item dropdown position-absolute top-0 end-0">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+              {{ user.username }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                {% comment %}
+              <li><a class="dropdown-item" href=" {% url 'createcategory' %} ">Добавить категорию</a></li>
+              <li><a class="dropdown-item" href="{% url 'createlaw' %} ">Добавить закон</a> </li> 
+              <li><a class="dropdown-item" href="{% url 'signupuser' %}">Регистрация</a></li>
+              {% endcomment %}
+              <li><a class="dropdown-item" href="{% url 'createdocument' %} ">Добавить документ</a></li>  
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <form action="{% url 'logoutuser' %}" method="POST">
+                  {% csrf_token %}
+                  <li><button type="submit" class="btn btn-light">Выйти</button></li>
+                </form>
+              </li>        
+            </ul>
+          </li>
+        {% else %}
+          <li class="nav-item dropdown position-absolute top-0 end-0">
+            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              Личный кабинет
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#login_form">Авторизаци</a></li>
+      
+            </ul>
+          </li>
+        {% endif %}  
+      </ul>
+        <div class="col-sm"> </div>
+        <div class="col-sm"> </div>
+        <div class="col-sm">
+            <form class="d-flex" action="{% url 'search' %}" method="get">
+                <input class="form-control me-2" name="q" type="search" placeholder="Поиск" aria-label="Поиск">
+                <button class="btn btn-outline-success" type="submit">Поиск</button>
+            </form>
+            {% comment %}
+            <a class="btn ext-search-btn" href="{% url 'ext_search' %}" role="button" aria-expanded="false" >
+                Расширенный поиск 
+            </a>{% endcomment %}
+        </div>
+
+    </div>
+
+  </div>
+
+{% comment %}  data-bs-toggle="dropdown"  
+<li><a class="dropdown-item" href="{% url 'loginuser' %}">Авторизация</a></li>
+{% endcomment %}
+<nav class="navbar navbar-expand-lg navbar-dark"  style="background-color:#007c84;">
+    <ul class="navbar-nav mr-auto mb-3 mb-lg-0 ">
+        <li class="nav-item dropdown">
+            <a class="{% if request.path == '/' %}active{% endif %} nav-link dropbtn" aria-current="page" href="/"> Главная </a>
+        </li>
+        {% for cat in category.all %}
+        {% if cat.title == "Акты антимонопольного органа" %}
+            <li class="nav-item dropdown">
+                <a class="{% if request.path == '/category/fas/' %}active{% endif %}  nav-link dropbtn" href="/category/{{cat.slug}}/" id="navbarDropdown" role="button" aria-expanded="false">
+                    {{cat.title}}
+                </a>
+                <ul class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown" style="left:0;">
+                    {% for dep in departament.all %}
+                        <li><a class=" dropdown-item" href="/departament/{{dep.slug}}/">{{ dep.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% elif cat.title == "Судебные акты" %}
+            <li class="nav-item dropdown">
+                <a class="{% if request.path == '/category/sud/' %}active{% endif %}  nav-link dropbtn " id="navbarDropdown" aria-current="page" href="/category/{{cat.slug}}/"> {{cat.title}}</a>
+            </li>
+        {% elif cat.title == "Акты органов прокуратуры" %}
+            <li class="nav-item dropdown">
+                <a class="{% if request.path == '/category/prokuratura/' %}active{% endif %} nav-link dropbtn" aria-current="page" href="/category/{{cat.slug}}/"> {{cat.title}}</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link2 nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Что-то еще</a>
+            </li>
+    </ul>
+    {% endif %}
+    {% endfor %}
+
+</nav>
+</div>
