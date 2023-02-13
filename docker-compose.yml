@@ -1,0 +1,56 @@
+# version: '3.12'
+# services:
+#   db:
+#      image: postgres
+#   web:
+#     build: ./app
+#     command: python manage.py runserver 0.0.0.0:8000
+#     volumes:
+#       - .:/code
+#     ports:
+#       - 8000:8000
+    # env_file:
+    #   - ./.env.dev
+
+# version: '3.12'
+# services:
+#     web:
+#        build: .
+#        command: python manage.py runserver localhost:8000
+#        ports:
+#            - 8000:8000
+
+# ------
+# version: "3.9"
+# services:
+#   postgres:
+#     image: postgres:13.3
+#     environment:
+#       POSTGRES_DB: "fasdb"
+#       POSTGRES_USER: "fasdbadmin"
+#       POSTGRES_PASSWORD: "admin"
+#     ports:
+#       - "5432:5432"
+#   web:
+#     build: .
+#     command: python manage.py runserver localhost:8000
+# ------------
+
+
+    # volumes:
+    #   - .:/code
+    # ports:
+    #   - "8000:8000"
+    
+yamlversion: '3'
+services:
+db:
+image: postgres:13.3
+environment:
+POSTGRES_DB: "fasdb"
+POSTGRES_USER: "fasdbadmin"
+POSTGRES_PASSWORD: "admin"
+ports: "5432:5432"
+# postgresvolumes: 
+# - ./data:/var/lib/postgresql/dataenvironment:- POSTGRES_USER=fasdbadmin POSTGRES_PASSWORD=admin:build:- .command:- python manage.py runserver 0.0.0.0:8000depends_on:- dbvolumes:- .:/appports:- 8000:8000environment:- DATABASE_URL=postgres://myuser:[email protected]:5432/mydb
+# docker-compose exec db psql --username=fasdbadmin --dbname=fasdb
