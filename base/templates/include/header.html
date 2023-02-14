@@ -87,10 +87,7 @@
             <li class="nav-item dropdown">
                 <a class="{% if request.path == '/category/prokuratura/' %}active{% endif %} nav-link dropbtn" aria-current="page" href="/category/{{cat.slug}}/"> {{cat.title}}</a>
             </li>
-        {% else %}
-            <li class="nav-item">
-                <a class="nav-link2 nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Что-то еще</a>
-            </li>
+  
     </ul>
     {% endif %}
     {% endfor %}

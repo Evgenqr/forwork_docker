@@ -12,6 +12,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
+# SECRET_KEY = os.environ.get("SECRET_KEY")
+# DEBUG = int(os.environ.get("DEBUG", default=0))
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+
+
 SECRET_KEY = 'django-insecure-#7e4&r=e@-o6flx2&dwwhj1nsvnw7=6(b596+6#9v+&oa3u1-4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -95,7 +101,7 @@ DATABASES = {
         'NAME': 'fasdb',
         'USER': 'fasdbadmin',
         'PASSWORD': 'admin',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432'
     }
 }
