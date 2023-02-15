@@ -6,23 +6,29 @@
 
     - Python 3.9.4
     - Django 3.2.9
+    - PostgreSQL 14
 
 ***О проекте***<br>
 
     Проект предназначен для сбора и хранения полезных статей/документов организации, разбитых по категориям.
+    Данная версия проекта является тестовой (был собран образ и запущен с использованием Docker)
 
 ***Примечание***
 
 ***Запуск проекта:***
 
-    git clone https://github.com/Evgenqr/forwork
+    git clone https://github.com/Evgenqr/forwork_docker
 
-    cd forwork
+    cd forwork_docker
 
     python -m venv venv
 
     venv\scripts\activate
 
-    pip install -r requirements.txt
+    docker compose build
 
-    python manage.py runserver
+    docker compose up -d
+
+    (для остановки выполнить команду docker compose down)
+
+    (для просмотра логов выполнить команду docker compose logs -f)
